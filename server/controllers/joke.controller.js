@@ -18,7 +18,7 @@ exports.getAllJokes = async (req, res) => {
 
 // function to post a joke
 exports.postJoke = async (req, res) => {
-    const user = req.user;
+    const user = req.body.user;
     const body = req.body;
     try {
         const joke = await Joke.create({
