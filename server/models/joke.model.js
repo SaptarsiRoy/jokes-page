@@ -16,7 +16,7 @@ const jokeSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-});
+}, { versionKey: false });
 
 // export joke model
 module.exports = mongoose.model('Joke', jokeSchema);

@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-});
+}, { versionKey: false });
 
 // hash the password before saving using bcrypt
 userSchema.pre('save', function (next) {
