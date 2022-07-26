@@ -8,7 +8,7 @@ const Joke = require('../models/joke.model');
 // function to get all jokes
 exports.getAllJokes = async (req, res) => {
     try {
-        const jokes = await Joke.find();
+        const jokes = await Joke.find().populate('jokedBy', 'name email');
         const count = jokes.length;
         res.status(200).json({ jokes, count });
     } catch (err) {
