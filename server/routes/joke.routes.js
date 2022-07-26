@@ -4,17 +4,20 @@
 // import express
 const express = require('express');
 
-// user controller
+// joke controller
 const controller = require('../controllers/joke.controller');
+
+// auth middleware
+const auth = require('../middleware/auth.middleware');
 
 // create a router
 const router = express.Router();
 
 // get request to get all jokes
-router.get('/jokes', controller.getAllJokes);
+router.get('/jokes', auth, controller.getAllJokes);
 
 // post request to add a new joke
-router.post('/jokes', controller.postJoke);
+router.post('/jokes', auth, controller.postJoke);
 
 // export joke routes
 module.exports = router;
