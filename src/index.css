@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap');
+
+#root,
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(180deg, rgb(34, 34, 34),
+            #39D9AD);
+    background-size: cover;
+    background-position: center;
+}
