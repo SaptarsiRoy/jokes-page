@@ -1,5 +1,6 @@
 // import express, body-parser, and cors
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const connection = require('./db.config');
@@ -21,6 +22,9 @@ app.use(bodyParser.json());
 
 // use cors to allow cross origin resource sharing
 app.use(cors());
+
+// server react app
+app.use(express.static(path.join(__dirname, '..', 'build')));
 
 // register routes
 app.use('/api', require('./routes/joke.routes'));
