@@ -14,10 +14,10 @@ const auth = require('../middleware/auth.middleware');
 const router = express.Router();
 
 // get request to get all jokes
-router.get('/jokes', auth, controller.getAllJokes);
+router.get('/jokes/:id', auth, controller.getAllJokes);
 
 // get request to get a random joke
-router.get('/jokes/random', auth, controller.getRandomJoke);
+router.get('/joke/random/:id', auth, controller.getRandomJoke);
 
 // post request to add a new joke
 router.post('/jokes', auth, controller.postJoke);
