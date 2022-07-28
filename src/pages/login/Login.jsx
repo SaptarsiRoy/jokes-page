@@ -27,7 +27,7 @@ export default function Login() {
               Please sign in
             </h1>
           </div>
-          <Form.Group className="form-floating" controlId="formBasicEmail">
+          <Form.Group controlId="formBasicEmail">
             <Form.Label visuallyHidden>Email address</Form.Label>
             <FloatingLabel controlId="floatingEmail" label="Enter email">
               <Form.Control
@@ -39,10 +39,7 @@ export default function Login() {
               />
             </FloatingLabel>
           </Form.Group>
-          <Form.Group
-            className="mb-3 form-floating"
-            controlId="formBasicPassword"
-          >
+          <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label visuallyHidden>Password</Form.Label>
             <FloatingLabel controlId="floatingPassword" label="Enter password">
               <Form.Control
