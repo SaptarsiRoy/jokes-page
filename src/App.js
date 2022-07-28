@@ -5,11 +5,11 @@ import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from './components/Navbar';
 
 // pages
-import AddJokes from './pages/AddJokes';
-import ViewJokes from './pages/ViewJokes';
-import Contact from "./pages/Contact";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import AddJokes from './pages/add_jokes/AddJokes';
+import ViewJokes from './pages/view_jokes/ViewJokes';
+import Contact from "./pages/contact/Contact";
+import Login from "./pages/login/Login";
+import Register from "./pages/registration/Registration";
 
 // styles
 import './App.css';
