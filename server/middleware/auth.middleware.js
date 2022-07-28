@@ -1,9 +1,12 @@
 /*
     setup middleware for authentication
 */
+// import User model
+const User = require('../models/user.model');
 
-const auth = (req, res, next) => {
-    const user = req.body.user;
+const auth = async (req, res, next) => {
+    const id = req.body.id;
+    const user = await User.findById(id);
     if (user) {
         req.user = user;
         next();
