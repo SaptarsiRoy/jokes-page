@@ -30,6 +30,11 @@ app.use(express.static(path.join(__dirname, '..', 'build')));
 app.use('/api', require('./routes/joke.routes'));
 app.use('/api', require('./routes/user.routes'));
 
+// serve 404 if no other route matched
+app.use((req, res) => {
+    res.status(404).json({ message: `${req.url} Not Found` });
+});
+
 // set our port
 const port = process.env.PORT || 5000;
 
