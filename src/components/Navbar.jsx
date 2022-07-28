@@ -36,6 +36,11 @@ export default function NavbarComponent() {
                 <Button variant="outline-light">Register</Button>
               </Nav.Link>
             </LinkContainer>
+            <LinkContainer to="/login">
+              <Nav.Link>
+                <Button variant="outline-light">Logout</Button>
+              </Nav.Link>
+            </LinkContainer>
           </Nav>
         </Navbar.Collapse>
       </Container>
