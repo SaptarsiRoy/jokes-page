@@ -16,6 +16,9 @@ const router = express.Router();
 // get request to get all jokes
 router.get('/jokes', auth, controller.getAllJokes);
 
+// get request to get a random joke
+router.get('/jokes/random', auth, controller.getRandomJoke);
+
 // post request to add a new joke
 router.post('/jokes', auth, controller.postJoke);
 
