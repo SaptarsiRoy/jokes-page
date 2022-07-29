@@ -1,6 +1,6 @@
 // react-router-dom
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Route,
   Routes,
   Navigate,
