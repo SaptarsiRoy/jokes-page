@@ -4,7 +4,14 @@ import { Navbar, Nav, Container, Button } from "react-bootstrap";
 // LinkContainer
 import { LinkContainer } from "react-router-bootstrap";
 
+// cookies
+import { useCookies } from "react-cookie";
+
 export default function NavbarComponent() {
+  const [cookies, setCookie] = useCookies(["user"]);
+  const handleLogout = () => {
+    setCookie("user", "", { path: "/" });
+  };
   return (
     <Navbar expand="lg" bg="dark" variant="dark" sticky="top">
       <Container>
@@ -26,21 +33,28 @@ export default function NavbarComponent() {
             </LinkContainer>
           </Nav>
           <Nav>
-            <LinkContainer to="/login">
-              <Nav.Link>
-                <Button variant="outline-light">Login</Button>
-              </Nav.Link>
-            </LinkContainer>
-            <LinkContainer to="/register">
-              <Nav.Link>
-                <Button variant="outline-light">Register</Button>
-              </Nav.Link>
-            </LinkContainer>
-            <LinkContainer to="/login">
-              <Nav.Link>
-                <Button variant="outline-light">Logout</Button>
-              </Nav.Link>
-            </LinkContainer>
+            {!cookies.user ? (
+              <>
+                <LinkContainer to="/login">
+                  <Nav.Link>
+                    <Button variant="outline-light">Login</Button>
+                  </Nav.Link>
+                </LinkContainer>
+                <LinkContainer to="/register">
+                  <Nav.Link>
+                    <Button variant="outline-light">Register</Button>
+                  </Nav.Link>
+                </LinkContainer>
+              </>
+            ) : (
+              <LinkContainer to="/login">
+                <Nav.Link>
+                  <Button variant="outline-light" onClick={handleLogout}>
+                    Logout
+                  </Button>
+                </Nav.Link>
+              </LinkContainer>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
