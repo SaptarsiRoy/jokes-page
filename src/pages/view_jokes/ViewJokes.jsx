@@ -11,7 +11,9 @@ export default function ViewJokes() {
   const [joke, setJoke] = useState({
     _id: 1,
     joke: "Click the Button to get a Joke",
-    author: "Anonymous",
+    jokedBy: {
+      name: "Anonymous",
+    },
   });
   const [isPending, setIsPending] = useState(false);
   const handleClick = async () => {
