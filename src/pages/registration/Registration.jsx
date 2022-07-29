@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 // react router dom
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 // react bootstrap components
 import { Form, Button, FloatingLabel, Alert } from "react-bootstrap";
@@ -13,6 +13,9 @@ import { useCookies } from "react-cookie";
 // icons
 import Eye from "../../assets/eye.svg";
 import EyeOff from "../../assets/cross_eye.svg";
+
+// constants
+import url from "../../constants/url";
 
 // styles
 import styles from "./Registration.module.css";
@@ -45,7 +48,7 @@ export default function Registration() {
     }
     // register user
     try {
-      const response = await fetch("http://localhost:5000/api/login", {
+      const response = await fetch(`${url}/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -160,6 +163,17 @@ export default function Registration() {
               Register
             </Button>
           </Form>
+          <div className="text-center mt-5">
+            <p style={{ color: "#fff" }}>
+              Already have an account ? &nbsp;&nbsp;
+              <Link
+                to="/login"
+                style={{ textDecoration: "none", color: "#00FFF3" }}
+              >
+                Login Here
+              </Link>
+            </p>
+          </div>
         </main>
       </div>
     </>

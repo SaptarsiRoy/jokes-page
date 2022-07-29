@@ -1,8 +1,8 @@
 // hooks
 import { useState } from "react";
 
-// react-boostrap
-// import { Button } from "react-bootstrap";
+// constants
+import url from "../../constants/url";
 
 // styles
 import styles from "./ViewJokes.module.css";
@@ -19,9 +19,7 @@ export default function ViewJokes() {
   const handleClick = async () => {
     try {
       setIsPending(true);
-      const url =
-        "http://localhost:5000/api/joke/random/62e021ede277490972ec219a";
-      const response = await fetch(url, {
+      const response = await fetch(`${url}/joke/random`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

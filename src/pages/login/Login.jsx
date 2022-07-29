@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 // react router dom
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 // react bootstrap components
 import { Form, Button, FloatingLabel, Alert } from "react-bootstrap";
@@ -13,6 +13,9 @@ import { useCookies } from "react-cookie";
 // icons
 import Eye from "../../assets/eye.svg";
 import EyeOff from "../../assets/cross_eye.svg";
+
+// constants
+import url from "../../constants/url";
 
 // import styles
 import styles from "./Login.module.css";
@@ -32,7 +35,7 @@ export default function Login() {
 
     // login user
     try {
-      const response = await fetch("http://localhost:5000/api/register", {
+      const response = await fetch(`${url}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -67,7 +70,7 @@ export default function Login() {
           <Form onSubmit={handleSubmit}>
             <div className="text-center">
               <h1 className="h3 mb-3 fw-normal" style={{ color: "white" }}>
-                Please sign in
+                Please login
               </h1>
             </div>
             <Form.Group controlId="formBasicEmail">
@@ -107,6 +110,17 @@ export default function Login() {
               Login
             </Button>
           </Form>
+          <div className="text-center mt-5">
+            <p style={{ color: "#fff" }}>
+              Don't have an account ? &nbsp;&nbsp;
+              <Link
+                to="/register"
+                style={{ textDecoration: "none", color: "#00FFF3" }}
+              >
+                Register Here
+              </Link>
+            </p>
+          </div>
         </main>
       </div>
     </>
