@@ -7,7 +7,10 @@ const connection = require("./db.config");
 
 // force https
 const forceSSL = (req, res, next) => {
-  if (req.headers["x-forwarded-proto"] !== "https") {
+  if (
+    req.headers["x-forwarded-proto"] !== "https" &&
+    process.env.NODE_ENV === "production"
+  ) {
     return res.redirect(["https://", req.get("Host"), req.url].join(""));
   }
   return next();
