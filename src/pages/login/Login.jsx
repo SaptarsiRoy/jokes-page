@@ -27,10 +27,12 @@ export default function Login() {
   const [showAlert, setShowAlert] = useState(false);
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
+    setError(null);
     e.preventDefault();
-    console.log(email, password);
+
+    // login user
     try {
-      const response = await fetch("http://localhost:5000/api/login", {
+      const response = await fetch("http://localhost:5000/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,33 +1,64 @@
 // react hooks
 import { useState } from "react";
 
+// react router dom
+import { useNavigate } from "react-router-dom";
+
 // react bootstrap components
 import { Form, Button, FloatingLabel, Alert } from "react-bootstrap";
+
+// cookies
+import { useCookies } from "react-cookie";
+
+// icons
+import Eye from "../../assets/eye.svg";
+import EyeOff from "../../assets/cross_eye.svg";
 
 // styles
 import styles from "./Registration.module.css";
 
 export default function Registration() {
+  // eslint-disable-next-line no-unused-vars
+  const [cookies, setCookie] = useCookies(["user"]);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [error, setError] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
+    setError(null);
     e.preventDefault();
     console.log(fullName, email, password, confirmPassword);
 
     // check if passwords match
     if (password !== confirmPassword) {
       setShowAlert(true);
+      setError("Passwords do not match");
       // reset passwords
       setPassword("");
       setConfirmPassword("");
       return;
     }
-
-    console.log(styles);
-
+    // register user
+    try {
+      const response = await fetch("http://localhost:5000/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name: fullName, email, password }),
+      });
+      const data = await response.json();
+      setCookie("user", data, { path: "/" });
+      navigate("/", { replace: true });
+    } catch (error) {
+      setShowAlert(true);
+      setError(error.message);
+    }
     // clear form
     setFullName("");
     setEmail("");
@@ -42,7 +73,7 @@ export default function Registration() {
         onClose={() => setShowAlert(false)}
         variant="danger"
       >
-        Passwords do not match!
+        {error && error}
       </Alert>
       <div
         style={{ display: "flex", alignItems: "center", marginTop: "15rem" }}
@@ -88,12 +119,18 @@ export default function Registration() {
                 label="Enter password"
               >
                 <Form.Control
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   className={styles["password"]}
                   placeholder="Enter password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
+                />
+                <img
+                  src={showPassword ? Eye : EyeOff}
+                  alt={showPassword ? "Show password" : "Hide password"}
+                  onClick={() => setShowPassword(!showPassword)}
+                  className={styles["eye-icon"]}
                 />
               </FloatingLabel>
             </Form.Group>
@@ -104,12 +141,18 @@ export default function Registration() {
                 label="Confirm password"
               >
                 <Form.Control
-                  type="password"
+                  type={showConfirmPassword ? "text" : "password"}
                   className={styles["confirm-password"]}
                   placeholder="Confirm password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
+                />
+                <img
+                  src={showConfirmPassword ? Eye : EyeOff}
+                  alt={showConfirmPassword ? "Show password" : "Hide password"}
+                  onClick={() => setShowConfirmPassword(!showPassword)}
+                  className={styles["eye-icon"]}
                 />
               </FloatingLabel>
             </Form.Group>
