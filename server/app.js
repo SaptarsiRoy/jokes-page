@@ -1,17 +1,34 @@
 // import express, body-parser, and cors
-const express = require('express');
-const path = require('path');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const connection = require('./db.config');
+const express = require("express");
+const path = require("path");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const connection = require("./db.config");
+
+// whitelist of domains that can access the API
+const whitelist = [
+  "http://localhost:3000",
+  "https://jokesapp3039.herokuapp.com",
+];
+
+// cors options to allow cross origin requests
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+};
 
 // connect to mongodb using connection
-connection.once('open', () => {
-    console.info('MongoDB connected successfully')
+connection.once("open", () => {
+  console.info("MongoDB connected successfully");
 });
 
-connection.on('error', (err) => {
-    console.error('error', 'MongoDB connection error: ' + err);
+connection.on("error", (err) => {
+  console.error("error", "MongoDB connection error: " + err);
 });
 
 // create an express application
@@ -21,18 +38,18 @@ const app = express();
 app.use(bodyParser.json());
 
 // use cors to allow cross origin resource sharing
-app.use(cors());
+app.use(cors(corsOptions));
 
 // server react app
-app.use(express.static(path.join(__dirname, '..', 'build')));
+app.use(express.static(path.join(__dirname, "..", "build")));
 
 // register routes
-app.use('/api', require('./routes/joke.routes'));
-app.use('/api', require('./routes/user.routes'));
+app.use("/api", require("./routes/joke.routes"));
+app.use("/api", require("./routes/user.routes"));
 
 // serve 404 if no other route matched
 app.use((req, res) => {
-    res.status(404).json({ message: `${req.url} Not Found` });
+  res.status(404).json({ message: `${req.url} Not Found` });
 });
 
 // set our port
