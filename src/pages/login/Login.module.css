@@ -18,3 +18,11 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
+
+.eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 2em;
+}
