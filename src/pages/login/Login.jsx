@@ -44,6 +44,9 @@ export default function Login() {
       });
       const data = await response.json();
       setCookie("user", data, { path: "/" });
+      // clear form
+      setEmail("");
+      setPassword("");
       navigate("/", { replace: true });
     } catch (error) {
       setShowAlert(true);

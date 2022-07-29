@@ -57,6 +57,11 @@ export default function Registration() {
       });
       const data = await response.json();
       setCookie("user", data, { path: "/" });
+      // clear form
+      setFullName("");
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
       navigate("/", { replace: true });
     } catch (error) {
       setShowAlert(true);
