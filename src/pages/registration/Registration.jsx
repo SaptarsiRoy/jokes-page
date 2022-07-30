@@ -159,7 +159,7 @@ export default function Registration() {
                 <img
                   src={showConfirmPassword ? Eye : EyeOff}
                   alt={showConfirmPassword ? "Show password" : "Hide password"}
-                  onClick={() => setShowConfirmPassword(!showPassword)}
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   className={styles["eye-icon"]}
                 />
               </FloatingLabel>
