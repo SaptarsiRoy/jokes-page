@@ -33,12 +33,21 @@ export default function ViewJokes() {
       setJoke(data);
     } catch (error) {
       setIsPending(false);
-      console.log(error);
-      setJoke({
-        _id: 1,
-        joke: "Error",
-        author: "Anonymous Error",
-      });
+      error.name === "TypeError" && error.message === "Failed to fetch"
+        ? setJoke({
+            _id: 1,
+            joke: "You are offline or else in space",
+            jokedBy: {
+              name: "No Internet",
+            },
+          })
+        : setJoke({
+            _id: 1,
+            joke: "Error",
+            jokedBy: {
+              name: "Anonymous Error",
+            },
+          });
     }
   };
   return (
