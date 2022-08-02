@@ -1,6 +1,7 @@
 // configure databse connection to mongodb
 // use dotenv
 require('dotenv').config({ path: '.env.local' });
+
 // import mongoose
 const mongoose = require('mongoose');
 
