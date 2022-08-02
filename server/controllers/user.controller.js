@@ -4,6 +4,9 @@
 // import user model
 const User = require("../models/user.model");
 
+// import transporter for sending email
+const transporter = require("../config/transport.config");
+
 // function to register a user
 exports.registerUser = async (req, res) => {
   const body = req.body;
@@ -52,6 +55,23 @@ exports.loginUser = async (req, res) => {
       });
     }
   } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// function to send an email to me with the user's message
+exports.sendEmail = async (req, res) => {
+  const { name, email, message } = req.body;
+  const mailOptions = {
+    from: email,
+    to: process.env.APP_EMAIL,
+    subject: "Message from " + name,
+    text: message,
+  };
+  try {
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ message: "Message sent" });
+  }catch(err){
     res.status(500).json({ message: err.message });
   }
 };

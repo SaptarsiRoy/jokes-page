@@ -16,5 +16,8 @@ router.post('/register', controller.registerUser);
 // post request to login a user
 router.post('/login', controller.loginUser);
 
+// post request to send an email to me with the user's message
+router.post('/sendEmail' ,controller.sendEmail);
+
 // export user routes
 module.exports = router;
