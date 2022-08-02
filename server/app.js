@@ -3,7 +3,7 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const connection = require("./db.config");
+const connection = require("./config/db.config");
 
 // force https
 const forceSSL = (req, res, next) => {
