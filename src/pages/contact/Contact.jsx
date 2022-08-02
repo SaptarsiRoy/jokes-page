@@ -47,10 +47,10 @@ export default function Contact() {
     }
 
     // clear form
-    // setFirstName("");
-    // setLastName("");
-    // setEmail("");
-    // setMessage("");
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setMessage("");
     setPending(false);
   };
   return (
